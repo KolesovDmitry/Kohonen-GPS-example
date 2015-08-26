@@ -6,7 +6,7 @@ points = read.table('9641.csv', sep=',', header=T)
 points = points[c('x', 'y')]
 
 # Выводим на график в порядке прочтения
-plot(points, main="Точки до упорядочивания")
+plot(points, main="Initial state")
 lines(points)
 
 # Сколько точек
@@ -25,8 +25,9 @@ points.som <- som(data = points.sc, grid = somgrid(1, N, "rectangular"), rlen=10
 res = data.frame(x=points$x, y=points$y, position=points.som$unit.classif)
 res <- res[order(res$position),]
 print(res)
+write.csv(res, 'result.csv')
 
 # График упорядоченных точек
-plot(res$x, res$y, main='После упорядочивания')
+plot(res$x, res$y, main='Result')
 lines(res$x, res$y)
 
